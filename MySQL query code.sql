@@ -1,3 +1,37 @@
+-- To get insights into the full dataset
+SELECT * FROM home_gift;
+
+--- To update home_gift table
+SELECT InvoiceDate
+FROM home_gift
+WHERE STR_TO_DATE(InvoiceDate, '%d/%m/%Y') IS NULL;
+
+--  To change the date format
+UPDATE home_gift
+SET InvoiceDate = '14/12/2010'
+WHERE InvoiceDate = '12/14/2010';
+
+--- To delete null/ invalid data 
+DELETE FROM home_gift
+WHERE STR_TO_DATE(InvoiceDate, '%d/%m/%Y') IS NULL;
+
+-- Convert the existing date values to the correct format
+UPDATE home_gift
+SET InvoiceDate = DATE_FORMAT(STR_TO_DATE(InvoiceDate, '%d/%m/%Y'), '%Y-%m-%d')
+WHERE STR_TO_DATE(InvoiceDate, '%d/%m/%Y') IS NOT NULL;
+
+-- Modify the column type to DATE
+ALTER TABLE home_gift MODIFY InvoiceDate DATE;
+
+--- To show the different data types in the table
+DESCRIBE home_gift
+
+ -- Change column name
+ ALTER TABLE home_gift
+ CHANGE COLUMN Description Product text
+
+ --- To show the different data types in the table
+ DESCRIBE home_gift
 
 -- To get insights of the full dataset
 SELECT * FROM home_gift
